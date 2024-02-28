@@ -37,5 +37,10 @@ namespace API_GESTOR_CLIENTES.Modelos
             return ok;
         }
 
+        public string CadenaConexion()
+        {
+            return cadenaConexion;
+        }
+
     }
 }
