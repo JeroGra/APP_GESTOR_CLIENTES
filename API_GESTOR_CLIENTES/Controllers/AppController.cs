@@ -31,5 +31,12 @@ namespace API_GESTOR_CLIENTES.Controllers
         {
             return await administrador.ListarClientes();
         }
+
+        [HttpPost]
+        [Route("administrador/cliente")]
+        public async Task<ActionResult<Respuesta>> insertarCliente([FromBody] UsuarioDireccion usuario_direccion)
+        {
+            return await administrador.InsertarCliente(usuario_direccion);
+        }
     }
 }
