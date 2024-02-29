@@ -12,11 +12,9 @@ correo varchar(50) NOT NULL, CONSTRAINT uk_ UNIQUE(correo)
 );
 
 create table ADMINISTRADORES (
-id_adm int NOT NULL IDENTITY(1,1), CONSTRAINT pk_id_adm PRIMARY KEY (id_adm,id_usuario),
 id_usuario int NOT NULL, 
 clave varchar(20) NOT NULL
 );
-
 alter table ADMINISTRADORES ADD CONSTRAINT adms_fk_usuario FOREIGN KEY(id_usuario) REFERENCES USUARIOS(id);
 
 
@@ -31,7 +29,6 @@ numero_telefono bigint NOT NULL
 );
 
 create table CLIENTES (
-id_cli int NOT NULL IDENTITY(1,1), CONSTRAINT pk_id_cli PRIMARY KEY (id_cli,id_usuario),
 id_usuario int NOT NULL,
 id_direccion int NOT NULL, 
 estado bit NOT NULL
@@ -41,13 +38,53 @@ alter table CLIENTES ADD CONSTRAINT clis_fk_usuario FOREIGN KEY(id_usuario) REFE
 alter table CLIENTES ADD CONSTRAINT clis_fk_direccion FOREIGN KEY(id_direccion) REFERENCES DIRECCIONES(id);
 
 
+
 CREAR PROCEDIMIENTOS ALMACENADOS (Stored Procedure)
 
 CREATE PROC listarUsuarios AS SELECT * FROM USUARIOS
 
-CREATE PROC listarClientes AS  SELECT DISTINCT c.*, u.nombre, u.apellido, u.fechaNacimiento, u.dni, u.correo, d.provincia, d.localidad, d.calle, d.numero, d.codigo_postal, d.numero_telefono 
+CREATE PROC listarClientes AS   SELECT DISTINCT c.*, u.nombre, u.apellido, u.fechaNacimiento, u.dni, u.correo, d.provincia, d.localidad, d.calle, d.numero, d.codigo_postal, d.numero_telefono 
 FROM CLIENTES AS c, USUARIOS AS u, DIRECCIONES AS d
-WHERE c.id_usuario = u.id AND c.id_direccion = d.id   
+WHERE c.id_usuario = u.id AND c.id_direccion = d.id 
+
+
+CREATE PROC insertarDireccion (
+@provincia varchar(50),
+@localidad varchar(50),
+@calle varchar(50),
+@numero int,
+@codigo_postal int,
+@numero_telefono bigint
+) as begin 
+	insert into DIRECCIONES(provincia,localidad,calle,numero,codigo_postal,numero_telefono) 
+	values(@provincia ,@localidad,@calle,@numero ,@codigo_postal,@numero_telefono)
+end  
+
+CREATE PROC traerDireccionId (
+@provincia varchar(50),
+@localidad varchar(50),
+@calle varchar(50),
+@numero int,
+@codigo_postal int,
+@numero_telefono bigint
+) as begin 
+	select id from DIRECCIONES where provincia = @provincia and localidad = @localidad and calle = @calle and numero = @numero  and codigo_postal = @codigo_postal and numero_telefono = @numero_telefono
+end
+
+
+CREATE PROC insertarTraerDireccion (
+@provincia varchar(50),
+@localidad varchar(50),
+@calle varchar(50),
+@numero int,
+@codigo_postal int,
+@numero_telefono bigint
+) as begin 
+	insert into DIRECCIONES(provincia,localidad,calle,numero,codigo_postal,numero_telefono) 
+	values(@provincia ,@localidad,@calle,@numero ,@codigo_postal,@numero_telefono);
+	select id from DIRECCIONES where provincia = @provincia and localidad = @localidad and calle = @calle and numero = @numero  and codigo_postal = @codigo_postal and numero_telefono = @numero_telefono
+end 
+
 
 
 DML
@@ -70,6 +107,10 @@ u.id = c.id_usuario
 and
 c.id_direccion = d.id
 and d.provincia = 'CABA'
+
+
+insert into DIRECCIONES(provincia,localidad,calle,numero,codigo_postal,numero_telefono) values('CABA','Villa del Parque','Arregui',2953,1417,542954406501);
+select id from DIRECCIONES where provincia = 'CABA'and localidad = 'Villa del Parque' and calle = 'Arregui' and numero = 2953 and codigo_postal = 1417 and numero_telefono = 542954406501;
 
 
 
