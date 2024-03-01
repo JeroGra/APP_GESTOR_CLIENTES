@@ -10,8 +10,5 @@
 
         public string error { get; set;} = string.Empty;
 
-        public int id { get; set; }
-
-
     }
 }

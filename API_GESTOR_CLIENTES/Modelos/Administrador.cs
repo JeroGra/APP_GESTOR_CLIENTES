@@ -1,10 +1,8 @@
 ﻿using API_GESTOR_CLIENTES.Data;
 using System.Data.SqlClient;
 using System.Data;
-using System.Numerics;
-using Newtonsoft.Json.Linq;
+using System.Text.Json;
 using System.Dynamic;
-using Newtonsoft.Json;
 
 namespace API_GESTOR_CLIENTES.Modelos
 {
@@ -140,7 +138,8 @@ namespace API_GESTOR_CLIENTES.Modelos
                             //Captura lo devuelto por el select
                             while (await item.ReadAsync())
                             {
-                             res.id = (int)item["id"];
+                                int id = (int)item["id"];
+                                res.data = id.ToString();
                             }
                             //Captura si se afecto alguna fila (row)
                            res.ok = item.RecordsAffected > 0;
@@ -184,7 +183,8 @@ namespace API_GESTOR_CLIENTES.Modelos
                             //Captura lo devuelto por el select
                             while (await item.ReadAsync())
                             {
-                                res.id = (int)item["id"];
+                                int id = (int)item["id"];
+                                res.data = id.ToString();
                             }
                             //Captura si se afecto alguna fila (row)
                             res.ok = item.RecordsAffected > 0;
@@ -208,16 +208,19 @@ namespace API_GESTOR_CLIENTES.Modelos
         public async Task<Respuesta> InsertarCliente(UsuarioDireccion ud)
         {
             Respuesta res = new Respuesta();
-            Usuario usuario = new Usuario(ud.idUs,ud.nombre,ud.apellido,ud.fechaNacimiento,ud.dni,ud.correo);
-            Direccion direccion = new Direccion(ud.idDir, ud.provincia, ud.localidad, ud.calle, ud.numero, ud.codigoPostal, ud.numeroTelefono);
+
+            Usuario usuario = ud.usuario;
+            Direccion direccion = ud.direccion;
+
             Respuesta resUsuario = new Respuesta();
             Respuesta resDireccion = new Respuesta();
+
             try
             {
                 resUsuario = await this.InsertarUsuario(usuario);
                 if (resUsuario.ok)
                 {
-                     resDireccion = await this.InsertarDireccion(direccion);
+                    resDireccion = await this.InsertarDireccion(direccion);
                     if (resDireccion.ok)
                     {
                         using (var sql = new SqlConnection(conexion.CadenaConexion()))
@@ -226,8 +229,8 @@ namespace API_GESTOR_CLIENTES.Modelos
                             using (var cmd = new SqlCommand("insertarCliente", sql))
                             {
                                 cmd.CommandType = CommandType.StoredProcedure;
-                                cmd.Parameters.AddWithValue("@idUs", resUsuario.id);
-                                cmd.Parameters.AddWithValue("@idDir", resDireccion.id);
+                                cmd.Parameters.AddWithValue("@idUs", Int32.Parse(resUsuario.data));
+                                cmd.Parameters.AddWithValue("@idDir", Int32.Parse(resDireccion.data));
 
                                 await sql.OpenAsync();
 
