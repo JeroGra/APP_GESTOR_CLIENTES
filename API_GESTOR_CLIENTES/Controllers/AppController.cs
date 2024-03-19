@@ -83,8 +83,8 @@ namespace API_GESTOR_CLIENTES.Controllers
                 var tokenDes = new SecurityTokenDescriptor
                 {
                     Subject = new ClaimsIdentity(new Claim[] {
-                        new Claim(ClaimTypes.NameIdentifier, admin.id.ToString()),
-                        new Claim(ClaimTypes.Name,admin.correo)
+                        new Claim("ID", admin.id.ToString()),
+                        new Claim("Correo",admin.correo)
                     }),
                     Expires = DateTime.UtcNow.AddDays(1),
                     SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(bytekey), SecurityAlgorithms.HmacSha256Signature)
@@ -120,8 +120,8 @@ namespace API_GESTOR_CLIENTES.Controllers
                 var tokenDes = new SecurityTokenDescriptor
                 {
                     Subject = new ClaimsIdentity(new Claim[] {
-                        new Claim(ClaimTypes.NameIdentifier, clien.id.ToString()),
-                        new Claim(ClaimTypes.Name,clien.correo)
+                        new Claim("ID", clien.id.ToString()),
+                        new Claim("Correo",clien.correo)
                     }),
                     Expires = DateTime.UtcNow.AddDays(1),
                     SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(bytekey), SecurityAlgorithms.HmacSha256Signature)
