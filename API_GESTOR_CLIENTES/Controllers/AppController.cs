@@ -68,7 +68,7 @@ namespace API_GESTOR_CLIENTES.Controllers
 
         [HttpPost]
         [Route("administrador/ingresar")]
-        public async Task<ActionResult<string>> IngresoAdministrador([FromBody] Administrador adm)
+        public async Task<ActionResult<Respuesta>> IngresoAdministrador([FromBody] Administrador adm)
         {
             Respuesta respuesta = new Respuesta();
 
@@ -91,12 +91,12 @@ namespace API_GESTOR_CLIENTES.Controllers
                 };
 
                 var token = tokenHandler.CreateToken(tokenDes);
-
-                return tokenHandler.WriteToken(token);
+                respuesta.data = tokenHandler.WriteToken(token);
+                return respuesta;
             }
             else
             {
-                return respuesta.mensaje;
+                return respuesta;
             }
 
            
@@ -105,7 +105,7 @@ namespace API_GESTOR_CLIENTES.Controllers
 
         [HttpPost]
         [Route("cliente/ingresar")]
-        public async Task<ActionResult<string>> IngresoCliente([FromBody] Cliente cli)
+        public async Task<ActionResult<Respuesta>> IngresoCliente([FromBody] Cliente cli)
         {
             Respuesta respuesta = new Respuesta();
 
@@ -128,12 +128,12 @@ namespace API_GESTOR_CLIENTES.Controllers
                 };
 
                 var token = tokenHandler.CreateToken(tokenDes);
-
-                return tokenHandler.WriteToken(token);
+                respuesta.data = tokenHandler.WriteToken(token);
+                return respuesta;
             }
             else
             {
-                return respuesta.mensaje;
+                return respuesta;
             }
         }
 
