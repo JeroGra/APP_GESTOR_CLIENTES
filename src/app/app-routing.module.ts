@@ -6,9 +6,10 @@ import { ErrorComponent } from './componentes/error/error.component';
 
 const routes: Routes = 
 [
-  {path:'', component:HomeComponent},
-  {path:'logIn', component:LogInComponent},
-  {path:'*',component:ErrorComponent}
+  { path:'', component:HomeComponent },
+  { path:'logIn', component:LogInComponent },
+  { path: 'gestor', loadChildren: () => import('./modulos/gestor/gestor.module').then(m => m.GestorModule) },
+  { path:'*',component:ErrorComponent },
 
 ];
 

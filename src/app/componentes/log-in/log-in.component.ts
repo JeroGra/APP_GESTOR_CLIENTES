@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ApiService } from 'src/app/servicios/api.service';
+import { LogService } from 'src/app/servicios/log.service';
 
 @Component({
   selector: 'app-log-in',
@@ -18,14 +20,24 @@ export class LogInComponent {
   dni : Number = 0;
 
   public formAdministrador : FormGroup;
+  public formCliente : FormGroup;
 
-  constructor(private fb : FormBuilder, private api : ApiService){
+  constructor(private fb : FormBuilder, private api : ApiService, private log :LogService, private route : Router){
 
     this.formAdministrador = this.fb.group({
       correo : ['',[
 
       ]],
       clave : ['',[
+
+      ]],
+    });
+
+    this.formCliente = this.fb.group({
+      correo : ['',[
+
+      ]],
+      dni : ['',[
 
       ]],
     })
@@ -61,10 +73,10 @@ export class LogInComponent {
   logIn(){
 
     if(this.usuario_administrador){
-      this.api.iniciarSesionAdministrador(this.correo,this.clave).subscribe((response:any) => { localStorage.setItem("token",response.data) });
+      this.api.iniciarSesionAdministrador(this.correo,this.clave).subscribe((response:any) => { this.log.Set(response.data,"Administrador"), this.route.navigateByUrl("/gestor") });
     }else{
       if(this.usuario_cliente){
-
+        this.api.iniciarSesionCliente(this.correo,this.dni).subscribe((response:any) => { this.log.Set(response.data,"Cliente"),this.route.navigateByUrl("/gestor") });
       }
     }
 

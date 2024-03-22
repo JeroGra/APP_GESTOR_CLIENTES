@@ -66,7 +66,29 @@
 
         </div>
 
-        <div>
+        <div *ngIf="usuario_cliente">
+
+            <div class="card border border-0">
+                <div class="card-body">
+
+                    <form [formGroup]="formCliente">
+
+                        <div class="mb-3">
+                          <label for="exampleInputEmail1" class="form-label">Correo</label>
+                          <input type="email" name="correo" formControlName="correo" class="form-control"  [(ngModel)]="correo">
+
+                        </div>
+                        <div class="mb-3">
+                          <label for="exampleInputPassword1" class="form-label">Clave</label>
+                          <input type="number" name="dni" formControlName="dni" class="form-control"  [(ngModel)]="dni">
+
+                        </div>
+                        <button type="submit" class="btn btn-primary" (click)="logIn()">Ingresar</button>
+                    
+                      </form>
+
+                </div>
+            </div>
 
         </div>
 

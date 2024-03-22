@@ -30,13 +30,13 @@ export class ApiService {
   }
 
   
-  public async iniciarSesionCliente(correo : string, dni : Number) : Promise<any> {
+  public iniciarSesionCliente(correo : string, dni : Number) : Observable<any> {
 
     let cli : Cliente = new Cliente();
     cli.correo = correo;
     cli.dni = dni;
 
-    return await this.htpp.post<any>(`${this.urlApi}cliente/ingresar`,cli);
+    return this.htpp.post<any>(`${this.urlApi}cliente/ingresar`,cli);
   }
 
   public listarClientes(miToken : string) : Observable<any> {

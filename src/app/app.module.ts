@@ -7,13 +7,20 @@ import { HomeComponent } from './componentes/home/home.component';
 import { LogInComponent } from './componentes/log-in/log-in.component';
 import { ErrorComponent } from './componentes/error/error.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PerfilComponent } from './componentes/perfil/perfil.component';
+import { CrudClienteComponent } from './componentes/crud-cliente/crud-cliente.component';
+import { ListaClientesComponent } from './componentes/lista-clientes/lista-clientes.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     LogInComponent,
-    ErrorComponent
+    ErrorComponent,
+    PerfilComponent,
+    CrudClienteComponent,
+    ListaClientesComponent,
   ],
   imports: [
     BrowserModule,
