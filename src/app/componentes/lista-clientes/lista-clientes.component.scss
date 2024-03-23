@@ -1,0 +1,7 @@
+.datos-tabla{
+    overflow: scroll;
+}
+
+.datos-tabla::-webkit-scrollbar{
+    display: none;
+}

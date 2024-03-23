@@ -3,6 +3,7 @@ import { Administrador } from '../modelos/Administrador';
 import { Cliente } from '../modelos/Cliente';
 import { ApiService } from './api.service';
 import { jwtDecode } from 'jwt-decode';
+import { Usuario } from '../modelos/Usuario';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ import { jwtDecode } from 'jwt-decode';
 export class LogService {
 
   private status = false;
-  private user : Administrador | Cliente | null = null;
+  private user : Usuario = new Usuario;
   private token : string = "";
   private rol : string = "";
     
@@ -19,15 +20,16 @@ export class LogService {
   public Set(token:string,rol:"Administrador"|"Cliente"){
 
     localStorage.setItem("token",token);
-
     let tokenDecode : any = jwtDecode(token);
-    let tokenData : any = tokenDecode.data;
 
     //funcion donde llamo al usuario segun el id
-    
+
+    this.user.correo = tokenDecode.Correo;
+    this.user.id = tokenDecode.ID;
     this.token = token;
     this.rol = rol;
     this.status = true;
+    
   }
 
   public Get(){

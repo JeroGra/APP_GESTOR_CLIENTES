@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { Cliente } from 'src/app/modelos/Cliente';
+import { ApiService } from 'src/app/servicios/api.service';
 
 @Component({
   selector: 'app-lista-clientes',
@@ -6,5 +8,24 @@ import { Component } from '@angular/core';
   styleUrls: ['./lista-clientes.component.scss']
 })
 export class ListaClientesComponent {
+
+  clientes : Cliente[] = []
+  @Output() clienteSeleccionadoEvent = new EventEmitter<Cliente>;
+  
+  constructor(private api : ApiService){
+    try
+    {
+      this.api.listarClientes(localStorage.getItem("token") as string).subscribe((data:Cliente[]) => { this.clientes = data});
+
+    }catch(e)
+    {
+
+    }
+  }
+
+  select(cliente:Cliente)
+  {
+    this.clienteSeleccionadoEvent.emit(cliente);
+  }
 
 }
