@@ -69,7 +69,8 @@ Cliente requiere MAIL y DNI :
 
 CRUD CLIENTE y LISTA DE CLIENTES : 
 
-![Captura de pantalla 2024-04-09 170452](https://github.com/JeroGra/APP_GESTOR_CLIENTES/assets/97103645/0dfa1394-e90a-4078-9744-c02b2dd4cfa6)
+![Captura de pantalla 2024-04-09 183709](https://github.com/JeroGra/APP_GESTOR_CLIENTES/assets/97103645/3734effb-13b1-4d23-8f89-45661394da5e)
+
 
 Se accede al ingresar o tocando el icono correspondiente en la barra de herramientas superior. A la izquierda tenemos el formulario para rellenar 
 con los datos de un cliente, cuál agregamos pulsando el botón verde.
