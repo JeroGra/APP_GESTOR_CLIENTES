@@ -16,7 +16,7 @@ Vista.
 ![GESTOR](https://github.com/JeroGra/APP_GESTOR_CLIENTES/assets/97103645/0d73b5b8-49f8-4846-a04d-ecb076ef1899)
 
 
-## FAQ
+## FAQ ❔
 
 #### ¿Que operaciones podemos realizar?
 
@@ -30,7 +30,9 @@ Las operaciones que podemos realizar son:
 
 
 
-## Diagramas
+## Diagramas 📑
+
+(Cambiar a modo claro para poder apreciarlos mejor)
 
 Diagramas de Clases (UML):
 
@@ -43,7 +45,7 @@ Diagrama de Entidad Relacion de la Base de Datos (DER de Martin):
 
 
 
-## Screenshots App Web, Modos de uso y Aclaraciones
+## Screenshots App Web, Modos de uso y Aclaraciones ⚙️
 
 Pagina Principal / LogIn:
 
@@ -88,7 +90,7 @@ Perfil del cliente:
 ![Captura de pantalla 2024-04-09 170542](https://github.com/JeroGra/APP_GESTOR_CLIENTES/assets/97103645/cc9d45b7-de90-4262-b1f7-c5ca5944d680)
 
 
-## Instalacion Comprimida
+## Instalacion Comprimida 🛠️
 
 Descargue la rama (branch) master. En ella encontrar las 3 partes:
 
@@ -98,7 +100,7 @@ Descargue la rama (branch) master. En ella encontrar las 3 partes:
 
 - Gestor_Clientes (Se encuentra el frontend realizado en angular), hay que instalar los módulos de Node, ya que estos se eliminaron para que la descarga sea más rápida.
 
-### IMPORTANTE
+### IMPORTANTE ‼️
 
 Tener instalado Angular CLI versión 16.2.12. Para poder correr el proyecto, y Visual Studio Code.
 
