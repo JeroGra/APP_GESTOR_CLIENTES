@@ -34,7 +34,7 @@ Las operaciones que podemos realizar son:
 
 Diagramas de Clases (UML):
 
-
+![image](https://github.com/JeroGra/APP_GESTOR_CLIENTES/assets/97103645/ce855994-f29e-4e46-aef7-48b90425a2d8)
 
 Diagrama de Entidad Relacion de la Base de Datos (DER de Martin):
 
