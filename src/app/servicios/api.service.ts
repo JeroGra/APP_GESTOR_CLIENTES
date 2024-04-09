@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Administrador } from '../modelos/Administrador';
 import { Cliente } from '../modelos/Cliente';
+import { Usuario } from '../modelos/Usuario';
+import { Direccion } from '../modelos/Direccion';
 
 @Injectable({
   providedIn: 'root'
@@ -47,6 +49,58 @@ export class ApiService {
     }); 
 
     return this.htpp.get<any>(`${this.urlApi}administrador/clientes`,{headers:header});
+  }
+
+  public listarClientesEliminados(miToken : string) : Observable<any> {
+
+    const token = `Bearer ${miToken}`;
+    const header = new HttpHeaders ({
+      Authorization:token
+    }); 
+
+    return this.htpp.get<any>(`${this.urlApi}administrador/cliente/eliminados`,{headers:header});
+  }
+
+  public InsertarCliente(miToken : string, usuario : Usuario, direccion :Direccion): Observable<any> {
+
+    const token = `Bearer ${miToken}`;
+    const header = new HttpHeaders ({
+      Authorization:token
+    });
+    
+    let resquest : any = {
+      usuario:usuario,
+      direccion:direccion
+    }
+
+    return this.htpp.post<any>(`${this.urlApi}administrador/cliente`,resquest,{headers:header});
+  }
+
+  
+  public ModificarCliente(miToken : string, usuario : Usuario, direccion :Direccion): Observable<any> {
+
+    const token = `Bearer ${miToken}`;
+    const header = new HttpHeaders ({
+      Authorization:token
+    });
+    
+    let resquest : any = {
+      usuario:usuario,
+      direccion:direccion
+    }
+
+    return this.htpp.post<any>(`${this.urlApi}administrador/cliente/modificar`,resquest,{headers:header});
+  }
+
+  public EliminarCliente(miToken : string, id: Number){
+
+    const token = `Bearer ${miToken}`;
+    const header = new HttpHeaders ({
+      Authorization:token
+    });
+    
+
+    return this.htpp.delete<any>(`${this.urlApi}administrador/cliente/`+id,{headers:header});
   }
 
 }

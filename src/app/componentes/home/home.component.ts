@@ -16,7 +16,7 @@ export class HomeComponent {
   ngOnInit(){
 
     this.apiConect();
-
+    localStorage.clear();
   }
 
   apiConect(){

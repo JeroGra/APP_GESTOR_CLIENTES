@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Cliente } from 'src/app/modelos/Cliente';
 import { ApiService } from 'src/app/servicios/api.service';
 
@@ -9,23 +9,19 @@ import { ApiService } from 'src/app/servicios/api.service';
 })
 export class ListaClientesComponent {
 
-  clientes : Cliente[] = []
   @Output() clienteSeleccionadoEvent = new EventEmitter<Cliente>;
-  
-  constructor(private api : ApiService){
-    try
-    {
-      this.api.listarClientes(localStorage.getItem("token") as string).subscribe((data:Cliente[]) => { this.clientes = data});
+  @Input() clientes : Array<Cliente> = []
 
-    }catch(e)
-    {
+  constructor(){
 
-    }
   }
 
   select(cliente:Cliente)
   {
     this.clienteSeleccionadoEvent.emit(cliente);
   }
+
+
+
 
 }
