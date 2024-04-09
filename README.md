@@ -13,8 +13,7 @@ Y como última pieza tenemos un FRONTEND realizado en Angular, donde se desarrol
 Vista.
 
 
-![Logo![GESTOR](https://github.com/JeroGra/APP_GESTOR_CLIENTES/assets/97103645/9caf1108-c719-4b52-a3fa-84872f4197c6)
-]()
+![GESTOR](https://github.com/JeroGra/APP_GESTOR_CLIENTES/assets/97103645/0d73b5b8-49f8-4846-a04d-ecb076ef1899)
 
 
 ## FAQ
