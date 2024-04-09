@@ -72,33 +72,43 @@ namespace API_GESTOR_CLIENTES.Controllers
         {
             Respuesta respuesta = new Respuesta();
 
-            respuesta = await administrador.IniciarSesion(adm);
-
-            Administrador? admin = JsonSerializer.Deserialize<Administrador>(respuesta.data);
-
-            if (respuesta.ok) 
+            try 
             {
-                var tokenHandler = new JwtSecurityTokenHandler();
-                var bytekey = Encoding.UTF8.GetBytes(key);
-                var tokenDes = new SecurityTokenDescriptor
+                respuesta = await administrador.IniciarSesion(adm);
+
+                Administrador? admin = JsonSerializer.Deserialize<Administrador>(respuesta.data);
+
+                if (respuesta.ok) 
                 {
-                    Subject = new ClaimsIdentity(new Claim[] {
-                        new Claim("ID", admin.id.ToString()),
-                        new Claim("Correo",admin.correo)
-                    }),
-                    Expires = DateTime.UtcNow.AddDays(1),
-                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(bytekey), SecurityAlgorithms.HmacSha256Signature)
-                };
+                    var tokenHandler = new JwtSecurityTokenHandler();
+                    var bytekey = Encoding.UTF8.GetBytes(key);
+                    var tokenDes = new SecurityTokenDescriptor
+                    {
+                        Subject = new ClaimsIdentity(new Claim[] {
+                            new Claim("ID", admin.id.ToString()),
+                            new Claim("Correo",admin.correo)
+                        }),
+                        Expires = DateTime.UtcNow.AddDays(1),
+                        SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(bytekey), SecurityAlgorithms.HmacSha256Signature)
+                    };
 
-                var token = tokenHandler.CreateToken(tokenDes);
-                respuesta.data = tokenHandler.WriteToken(token);
-                return respuesta;
+                    var token = tokenHandler.CreateToken(tokenDes);
+                    respuesta.data = tokenHandler.WriteToken(token);
+                    return respuesta;
+                }
+                else
+                {
+                    return respuesta;
+                }
             }
-            else
+            catch (Exception ex) 
             {
+                respuesta.ok = false;
+                respuesta.mensaje = "Error, Usuario Inexistente";
+                respuesta.error = ex.Message;
+
                 return respuesta;
             }
-
            
         }
 
@@ -109,32 +119,45 @@ namespace API_GESTOR_CLIENTES.Controllers
         {
             Respuesta respuesta = new Respuesta();
 
-            respuesta = await cliente.IniciarSesion(cli);
-
-            Cliente? clien = JsonSerializer.Deserialize<Cliente>(respuesta.data);
-
-            if (respuesta.ok)
+            try
             {
-                var tokenHandler = new JwtSecurityTokenHandler();
-                var bytekey = Encoding.UTF8.GetBytes(key);
-                var tokenDes = new SecurityTokenDescriptor
+
+                respuesta = await cliente.IniciarSesion(cli);
+
+                Cliente? clien = JsonSerializer.Deserialize<Cliente>(respuesta.data);
+
+                if (respuesta.ok)
                 {
-                    Subject = new ClaimsIdentity(new Claim[] {
-                        new Claim("ID", clien.id.ToString()),
-                        new Claim("Correo",clien.correo)
-                    }),
-                    Expires = DateTime.UtcNow.AddDays(1),
-                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(bytekey), SecurityAlgorithms.HmacSha256Signature)
-                };
+                    var tokenHandler = new JwtSecurityTokenHandler();
+                    var bytekey = Encoding.UTF8.GetBytes(key);
+                    var tokenDes = new SecurityTokenDescriptor
+                    {
+                        Subject = new ClaimsIdentity(new Claim[] {
+                            new Claim("ID", clien.id.ToString()),
+                            new Claim("Correo",clien.correo)
+                        }),
+                        Expires = DateTime.UtcNow.AddDays(1),
+                        SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(bytekey), SecurityAlgorithms.HmacSha256Signature)
+                    };
 
-                var token = tokenHandler.CreateToken(tokenDes);
-                respuesta.data = tokenHandler.WriteToken(token);
-                return respuesta;
+                    var token = tokenHandler.CreateToken(tokenDes);
+                    respuesta.data = tokenHandler.WriteToken(token);
+                    return respuesta;
+                }
+                else
+                {
+                    return respuesta;
+                }
             }
-            else
+            catch (Exception ex)
             {
+                respuesta.ok = false;
+                respuesta.mensaje = "Error, Usuario Inexistente";
+                respuesta.error = ex.Message;
+            
                 return respuesta;
             }
+
         }
 
         [Authorize]
