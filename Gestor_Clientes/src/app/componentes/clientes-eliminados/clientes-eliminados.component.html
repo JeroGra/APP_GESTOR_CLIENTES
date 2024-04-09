@@ -1,0 +1,75 @@
+<div class="container text-center" style="margin-top: 100px;">
+    <div class="row">
+      <div class="col shadow p-3 mb-5 bg-body-tertiary rounded">
+        
+        <!-- Agregar -->
+        <div>
+            <div class="row g-3" >
+
+                <div class="col-md-6">
+                    <strong><label  class="form-label">Nombre</label></strong>
+                    <input disabled="true" type="text" class="form-control" [(ngModel)]="clienteSeleccionado.nombre">
+                </div>
+                <div class="col-md-6">
+                    <strong><label  class="form-label">Apellido</label></strong>
+                    <input disabled="true" type="text" class="form-control" [(ngModel)]="clienteSeleccionado.apellido">
+                </div>
+                <div class="col-md-6">
+                    <strong><label  class="form-label">Correo</label></strong>
+                    <input disabled="true" type="text" class="form-control" [(ngModel)]="clienteSeleccionado.correo">
+                </div>
+                <div class="col-md-6">
+                    <strong><label  class="form-label">DNI</label></strong>
+                    <input disabled="true"  type="number" class="form-control"[(ngModel)]="clienteSeleccionado.dni">
+                </div>
+                <div class="col-md-6">
+                    <strong><label class="form-label">Fecha de Nacimiento</label></strong>
+                    <input disabled="true" type="datetime" class="form-control"[(ngModel)]="clienteSeleccionado.fechaNacimiento" >
+                </div>
+                <div class="col-md-6">
+                    <strong><label class="form-label">Provincia</label></strong>
+                    <input  disabled="true"  type="text" class="form-control" [(ngModel)]="clienteSeleccionado.direccion.provincia" >
+                </div>                      
+                <div class="col-md-6">
+                    <strong><label class="form-label">Localidad</label></strong>
+                    <input disabled="true" type="text"  class="form-control" [(ngModel)]="clienteSeleccionado.direccion.localidad">
+                </div>
+                <div class="col-md-6">
+                    <strong><label  class="form-label">Calle</label></strong>
+                    <input disabled="true" type="text" class="form-control" [(ngModel)]="clienteSeleccionado.direccion.calle">
+                </div>
+                <div class="col-md-6">
+                    <strong><label  class="form-label">Numero (Altura)</label></strong>
+                    <input disabled="true" type="number" class="form-control" [(ngModel)]="clienteSeleccionado.direccion.numero" >
+                </div>
+                <div class="col-md-6">
+                    <strong><label  class="form-label">Codigo Postal</label></strong>
+                    <input disabled="true" type="number" class="form-control" [(ngModel)]="clienteSeleccionado.direccion.codigoPostal" >
+                </div>
+                <div class="col-md-12">
+                  <strong><label  class="form-label">Numero Telefono</label></strong>
+                  <div class="input-group has-validation">
+                    <input disabled="true" type="number" class="form-control" [(ngModel)]="clienteSeleccionado.direccion.numeroTelefono">
+                  </div>
+                </div>
+
+                <!-- <div class="col-3 ">
+                    <button (click)="AgregarCliente()" [disabled]="clienteSeleccionado.id != 0 " class="btn btn-success shadow rounded" type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-add" viewBox="0 0 16 16">
+                      <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0m-2-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0M8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4"/>
+                      <path d="M8.256 14a4.5 4.5 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10q.39 0 .74.025c.226-.341.496-.65.804-.918Q8.844 9.002 8 9c-5 0-6 3-6 4s1 1 1 1z"/>
+                    </svg></button>
+                  </div> -->
+      
+                
+
+                  </div>
+        </div>
+
+      </div>
+      <div class="col">
+       
+        <app-lista-clientes [clientes]="arrayClientes" (clienteSeleccionadoEvent)="ClienteSeleccionado($event)"></app-lista-clientes>
+
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,28 @@
+.datos-tabla{
+    overflow: scroll;
+}
+
+.datos-tabla::-webkit-scrollbar{
+    display: none;
+}
+
+.btn-in{
+    border-color: rgb(251, 91, 91);
+    margin: 0.1rem;
+    width: 5rem;
+    height: 1.5rem;
+}
+
+.btn-ha{
+    border-color: #80ED99;
+    margin: 0.1rem;
+    width: 5rem;
+    height: 1.5rem;
+}
+
+.habilitado{
+    background-color: #80ED99;
+}
+.inhabilitado{
+    background-color: #ed8080;
+}

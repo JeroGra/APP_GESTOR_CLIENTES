@@ -1,0 +1,49 @@
+<div class="container text-center shadow p-3 mb-5 bg-body-tertiary rounded" style="height: 92.5%;">
+ <!--   <div class="row row-cols-4">
+      <div class="col">nombre</div>
+      <div class="col">apellido</div>
+      <div class="col">dni</div>
+      <div class="col">correo</div>
+    </div>
+
+    <div *ngFor="let cliente of clientes">
+      <div (click)="select(cliente)" class="row row-cols-4" >
+        <div class="col">{{cliente.nombre}}</div>
+        <div class="col">{{cliente.apellido}}</div>
+        <div class="col">{{cliente.dni}}</div>
+        <div class="col">{{cliente.correo}}</div>
+      </div>
+    </div> -->
+
+    <div class="row row-cols-1">
+      <div class="col">
+        
+        <div class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search" style="margin-bottom: 5px;">
+        </div>
+
+      </div>
+    </div>
+
+    <table class="table  table-hover">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th class="col">nombre</th>
+          <th class="col">apellido</th>
+          <th class="col">dni</th>
+          <th class="col">correo</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let cliente of clientes; let i = index" class="datos-tabla">
+        <tr (click)="select(cliente)">
+          <th scope="row">{{i}}</th>
+          <td>{{cliente.nombre}}</td>
+          <td>{{cliente.apellido}}</td>
+          <td>{{cliente.dni}}</td>
+          <td>{{cliente.correo}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>

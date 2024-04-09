@@ -1,0 +1,61 @@
+<div class="container text-center" style="margin-top: 100px;">
+    <div class="row">
+      <div class="col shadow p-3 mb-5 bg-body-tertiary rounded">
+        
+        <div>
+            <div class="row g-3" >
+                
+                    <div class="col-md-6">
+                        <strong><label  class="form-label">Nombre</label></strong>
+                        <input disabled="true" type="text" class="form-control" [(ngModel)]="usuario.nombre">
+                    </div>
+                    <div class="col-md-6">
+                        <strong><label  class="form-label">Apellido</label></strong>
+                        <input disabled="true" type="text" class="form-control" [(ngModel)]="usuario.apellido">
+                    </div>
+                    <div class="col-md-6">
+                        <strong><label  class="form-label">Correo</label></strong>
+                        <input disabled="true" type="text" class="form-control" [(ngModel)]="usuario.correo">
+                    </div>
+                    <div class="col-md-6">
+                        <strong><label  class="form-label">DNI</label></strong>
+                        <input disabled="true"  type="number" class="form-control"[(ngModel)]="usuario.dni">
+                    </div>
+                    <div class="col-md-6">
+                        <strong><label class="form-label">Fecha de Nacimiento</label></strong>
+                        <input disabled="true" type="datetime" class="form-control"[(ngModel)]="usuario.fechaNacimiento" >
+                    </div>
+                    <div class="col-md-6">
+                        <strong><label class="form-label">Provincia</label></strong>
+                        <input  disabled="true"  type="text" class="form-control" [(ngModel)]="direccion.provincia" >
+                    </div>                      
+                    <div class="col-md-6">
+                        <strong><label class="form-label">Localidad</label></strong>
+                        <input disabled="true" type="text"  class="form-control" [(ngModel)]="direccion.localidad">
+                    </div>
+                    <div class="col-md-6">
+                        <strong><label  class="form-label">Calle</label></strong>
+                        <input disabled="true" type="text" class="form-control" [(ngModel)]="direccion.calle">
+                    </div>
+                    <div class="col-md-6">
+                        <strong><label  class="form-label">Numero (Altura)</label></strong>
+                        <input disabled="true" type="number" class="form-control" [(ngModel)]="direccion.numero" >
+                    </div>
+                    <div class="col-md-6">
+                        <strong><label  class="form-label">Codigo Postal</label></strong>
+                        <input disabled="true" type="number" class="form-control" [(ngModel)]="direccion.codigoPostal" >
+                    </div>
+                    <div class="col-md-12">
+                      <strong><label  class="form-label">Numero Telefono</label></strong>
+                      <div class="input-group has-validation">
+                        <input disabled="true" type="number" class="form-control" [(ngModel)]="direccion.numeroTelefono">
+                      </div>
+                    </div>
+
+                  </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
