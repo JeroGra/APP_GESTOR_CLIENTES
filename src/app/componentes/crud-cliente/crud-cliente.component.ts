@@ -21,7 +21,6 @@ export class CrudClienteComponent {
   arrayClientes : Array<Cliente> = [];
 
   errorForm = true;
-
   errorNombre = false;
   errorApellido = false;
   errorCorreo = false;
@@ -141,7 +140,7 @@ export class CrudClienteComponent {
         }
       break;
       case 'Numero':
-        if(this.ValidarNumero(this.clienteSeleccionado.direccion.numero) && this.clienteSeleccionado.direccion.numero.toString().length >= 1 &&  this.clienteSeleccionado.direccion.numero.toString().length <= 4){
+        if(this.ValidarNumero(this.clienteSeleccionado.direccion.numero) && this.clienteSeleccionado.direccion.numero.toString().length >= 1 &&  this.clienteSeleccionado.direccion.numero.toString().length <= 4 && this.clienteSeleccionado.direccion.numero as number > 0){
           this.errorNumero = false;
         }else{      
           this.errorNumero = true;
@@ -238,6 +237,25 @@ ErrorForm(){
   }
 }
 
+ CorrecionMayusculasMinusculas(nombre: String): String {
+
+  if (nombre.length === 0) {
+      return nombre;
+  }
+
+  let result = nombre.toLowerCase();
+  result = result.charAt(0).toUpperCase() + result.slice(1);
+
+  for (let i = 0; i < result.length; i++) {
+      if (result[i] === ' ') {
+          result = result.slice(0, i + 1) + result.charAt(i + 1).toUpperCase() + result.slice(i + 2);
+      }
+  }
+
+  return result;
+
+}
+
 AgregarCliente(){
 
   this.Validar('Nombre');
@@ -256,8 +274,8 @@ AgregarCliente(){
   if(!this.errorForm){
 
 
-    let usuario = new Usuario(0,this.clienteSeleccionado.nombre,this.clienteSeleccionado.apellido,this.clienteSeleccionado.fechaNacimiento,this.clienteSeleccionado.dni,this.clienteSeleccionado.correo);
-    let direccion = new Direccion(0,this.clienteSeleccionado.direccion.provincia,this.clienteSeleccionado.direccion.localidad,this.clienteSeleccionado.direccion.calle,this.clienteSeleccionado.direccion.numero,this.clienteSeleccionado.direccion.codigoPostal,this.clienteSeleccionado.direccion.numeroTelefono);
+    let usuario = new Usuario(0,this.CorrecionMayusculasMinusculas(this.clienteSeleccionado.nombre),this.CorrecionMayusculasMinusculas(this.clienteSeleccionado.apellido),this.clienteSeleccionado.fechaNacimiento,this.clienteSeleccionado.dni,this.clienteSeleccionado.correo);
+    let direccion = new Direccion(0,this.clienteSeleccionado.direccion.provincia,this.CorrecionMayusculasMinusculas(this.clienteSeleccionado.direccion.localidad),this.CorrecionMayusculasMinusculas(this.clienteSeleccionado.direccion.calle),this.clienteSeleccionado.direccion.numero,this.clienteSeleccionado.direccion.codigoPostal,this.clienteSeleccionado.direccion.numeroTelefono);
 
     this.api.InsertarCliente(this.log.Get().token,usuario,direccion).subscribe((data:any)=>{
      
@@ -269,7 +287,8 @@ AgregarCliente(){
           showConfirmButton: false,
           timer: 1500
         });
-
+        
+        this.DeseleccionarCliente();
         this.TraerClientes();
 
       }else{
@@ -316,8 +335,8 @@ ModificarCliente(){
 
   if(!this.errorForm){
 
-    let usuario = new Usuario(this.clienteSeleccionado.id,this.clienteSeleccionado.nombre,this.clienteSeleccionado.apellido,this.clienteSeleccionado.fechaNacimiento,this.clienteSeleccionado.dni,this.clienteSeleccionado.correo);
-    let direccion = new Direccion(this.clienteSeleccionado.direccion.id,this.clienteSeleccionado.direccion.provincia,this.clienteSeleccionado.direccion.localidad,this.clienteSeleccionado.direccion.calle,this.clienteSeleccionado.direccion.numero,this.clienteSeleccionado.direccion.codigoPostal,this.clienteSeleccionado.direccion.numeroTelefono);
+    let usuario = new Usuario(this.clienteSeleccionado.id,this.CorrecionMayusculasMinusculas(this.clienteSeleccionado.nombre),this.CorrecionMayusculasMinusculas(this.clienteSeleccionado.apellido),this.clienteSeleccionado.fechaNacimiento,this.clienteSeleccionado.dni,this.clienteSeleccionado.correo);
+    let direccion = new Direccion(this.clienteSeleccionado.direccion.id,this.clienteSeleccionado.direccion.provincia,this.CorrecionMayusculasMinusculas(this.clienteSeleccionado.direccion.localidad),this.CorrecionMayusculasMinusculas(this.clienteSeleccionado.direccion.calle),this.clienteSeleccionado.direccion.numero,this.clienteSeleccionado.direccion.codigoPostal,this.clienteSeleccionado.direccion.numeroTelefono);
 
 
     this.api.ModificarCliente(this.log.Get().token,usuario,direccion).subscribe((data:any)=>{
@@ -330,6 +349,10 @@ ModificarCliente(){
           showConfirmButton: false,
           timer: 1500
         });
+
+        this.DeseleccionarCliente();
+        this.TraerClientes();
+        
       }else{
         Swal.fire({
           position: "top",

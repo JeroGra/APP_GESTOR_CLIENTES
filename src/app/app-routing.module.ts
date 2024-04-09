@@ -9,6 +9,7 @@ const routes: Routes =
   { path:'', component:HomeComponent },
   { path:'logIn', component:LogInComponent },
   { path: 'gestor', loadChildren: () => import('./modulos/gestor/gestor.module').then(m => m.GestorModule) },
+  { path: 'clientes', loadChildren: () => import('./modulos/clientes/clientes.module').then(m => m.ClientesModule) },
   { path:'*',component:ErrorComponent },
 
 ];

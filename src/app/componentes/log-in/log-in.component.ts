@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/servicios/api.service';
 import { LogService } from 'src/app/servicios/log.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-log-in',
@@ -60,6 +61,10 @@ export class LogInComponent {
     this.usuario_cliente = true;
     this.select_usuarios = false;
 
+    //Hardcore
+    this.correo = "anaT@gmail.com";
+    this.dni = 22222222;
+
   }
 
   atras(){
@@ -72,14 +77,69 @@ export class LogInComponent {
 
   logIn(){
 
-    if(this.usuario_administrador){
-      this.api.iniciarSesionAdministrador(this.correo,this.clave).subscribe((response:any) => { this.log.Set(response.data,"Administrador"), this.route.navigateByUrl("/gestor") });
-    }else{
-      if(this.usuario_cliente){
-        this.api.iniciarSesionCliente(this.correo,this.dni).subscribe((response:any) => { this.log.Set(response.data,"Cliente"),this.route.navigateByUrl("/gestor") });
+      if(this.usuario_administrador){
+          this.api.iniciarSesionAdministrador(this.correo,this.clave).subscribe((response:any) => {
+
+            if(response.ok){
+
+              this.log.Set(response.data,"Administrador"), this.route.navigateByUrl("/gestor") 
+  
+              Swal.fire({
+               text: response.mensaje,
+               showConfirmButton: false,
+               timer: 1000,
+               toast: true,
+               position: 'top',
+               icon:'success',
+             });
+
+            }else{
+
+              Swal.fire({
+                text: response.mensaje,
+                showConfirmButton: false,
+                timer: 1000,
+                toast: true,
+                position: 'top',
+                icon:'error',
+              });
+
+            }
+          });
+      }else{
+        if(this.usuario_cliente){
+          this.api.iniciarSesionCliente(this.correo,this.dni).subscribe((response:any) => {
+
+            if(response.ok){
+
+              this.log.Set(response.data,"Cliente"),this.route.navigateByUrl("/clientes") 
+  
+              Swal.fire({
+               text: response.mensaje,
+               showConfirmButton: false,
+               timer: 1000,
+               toast: true,
+               position: 'top',
+               icon:'success',
+             });
+
+            }else{
+
+              Swal.fire({
+                text: response.mensaje,
+                showConfirmButton: false,
+                timer: 1000,
+                toast: true,
+                position: 'top',
+                icon:'error',
+              });
+
+            }
+          });
+        }
       }
-    }
 
   }
+
 
 }

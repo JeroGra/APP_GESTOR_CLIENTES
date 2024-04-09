@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PerfilComponent } from './componentes/perfil/perfil.component';
 import { CrudClienteComponent } from './componentes/crud-cliente/crud-cliente.component';
 import { ListaClientesComponent } from './componentes/lista-clientes/lista-clientes.component';
+import { ClientesEliminadosComponent } from './componentes/clientes-eliminados/clientes-eliminados.component';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { ListaClientesComponent } from './componentes/lista-clientes/lista-clien
     PerfilComponent,
     CrudClienteComponent,
     ListaClientesComponent,
+    ClientesEliminadosComponent,
   ],
   imports: [
     BrowserModule,

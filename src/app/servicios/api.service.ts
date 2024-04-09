@@ -99,8 +99,17 @@ export class ApiService {
       Authorization:token
     });
     
-
     return this.htpp.delete<any>(`${this.urlApi}administrador/cliente/`+id,{headers:header});
+  }
+
+  public ObtenerClienteId(miToken : string, id: Number){
+
+    const token = `Bearer ${miToken}`;
+    const header = new HttpHeaders ({
+      Authorization:token
+    });
+    
+    return this.htpp.get<any>(`${this.urlApi}administrador/cliente/`+id,{headers:header});
   }
 
 }
