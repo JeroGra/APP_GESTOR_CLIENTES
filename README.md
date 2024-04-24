@@ -3,6 +3,8 @@
 
 App Web desarrollada para  Gestionar Clientes, Esta app está dividida en 3 partes interconectadas.
 
+Video donde se puede ver su funcionamiento ➡️ https://www.linkedin.com/feed/update/urn:li:ugcPost:7188888061391368192/
+
 Tenemos un BACKEND a modo de API desarrollada en ASP.NET donde desarrollamos el Modelo y Controlador.
 
 Por otra parte cuenta con La base de datos en Microsoft SQL Server de forma local, donde 
